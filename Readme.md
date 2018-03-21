@@ -43,10 +43,12 @@ notebook_1  | [I 13:55:37.610 NotebookApp] 302 GET /?token=514848f23f594b8adc7e1
 ## Built With
 
 * [Python](https://python.org/) - The web framework used
-* [PIP](https://npmjs.com/) - Dependency Management
+* [PIP]() - Dependency Management
+* [Jupyter](https://jupyter.org/) - Jupyter
 * [Sklearn](https://npmjs.com/) - Scikit Learn
-* [Jupyter](https://npmjs.com/) - Jupyter
-* [Matplotlib](https://npmjs.com/) - Matplotlib 
+* [Matplotlib](https://matplotlib.org/) - Matplotlib
+* [Pandas](https://pandas.pydata.org/) - Pandas
+* [Numpy](http://www.numpy.org/) - Pandas
 
 
 
