@@ -1,0 +1,39 @@
+version: '3.2'
+
+services:
+  mongo:
+    image: mongo:3.4.10
+    ports:
+      - "27017:27017"
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+  notebook:
+    image: ampsersandlabs/houdini
+    build: .
+    volumes:
+      - .:/app
+    ports:
+      - "8888:8888"
+    # env_file: .env
+    links:
+      - mongo
+      - redis
+    depends_on:
+      - mongo
+      - redis
+  # worker:
+  #   image: ampsersandlabs/houdini
+  #   build: .
+  #   command: rq worker
+  #   volumes:      
+  #     - .:/app
+  #   # env_file: .env
+  #   links:
+  #     - mongo
+  #     - redis
+  #   depends_on:
+  #     - mongo
+  #     - redis
+
