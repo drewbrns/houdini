@@ -7,6 +7,7 @@ WORKDIR /app
 
 # Install any needed packages specified in requirements.txt
 ADD requirements.txt /app/
+RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
 # Copy the current directory contents into the container at /app
