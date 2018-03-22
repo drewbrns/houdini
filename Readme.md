@@ -45,13 +45,13 @@ notebook_1  | [I 13:55:37.610 NotebookApp] 302 GET /?token=514848f23f594b8adc7e1
 * [Python](https://python.org/) - The web framework used
 * [PIP]() - Dependency Management
 * [Jupyter](https://jupyter.org/) - Notebook
+* [Scrapy](https://scrapy.org/) - Web Scraping 
 * [NLTK](http://www.nltk.org/) - NLTK
+* [Numpy](http://www.numpy.org/) - Large efficient arrays
+* [Pandas](https://pandas.pydata.org/) - Data wrangling
+* [Matplotlib](https://matplotlib.org/) - Ploting Graphs
 * [Scikit-learn](http://scikit-learn.org/) - Machine Learning tools
 * [Tensorflow](https://www.tensorflow.org/) - Machine Learning tools 
-* [Matplotlib](https://matplotlib.org/) - Ploting Graphs
-* [Pandas](https://pandas.pydata.org/) - Data wrangling
-* [Numpy](http://www.numpy.org/) - Large efficient arrays
-* [Scrapy](https://scrapy.org/) - Web Scraping 
 
 
 
