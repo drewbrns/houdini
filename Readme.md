@@ -46,7 +46,7 @@ notebook_1  | [I 13:55:37.610 NotebookApp] 302 GET /?token=514848f23f594b8adc7e1
 * [PIP]() - Dependency Management
 * [Jupyter](https://jupyter.org/) - Notebook
 * [NLTK](http://www.nltk.org/) - NLTK
-* [Sklearn](http://scikit-learn.org/) - Machine Learning tools
+* [Scikit-learn](http://scikit-learn.org/) - Machine Learning tools
 * [Tensorflow](https://www.tensorflow.org/) - Machine Learning tools 
 * [Matplotlib](https://matplotlib.org/) - Ploting Graphs
 * [Pandas](https://pandas.pydata.org/) - Data wrangling
