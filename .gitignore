@@ -27,3 +27,5 @@ Temporary Items
 .apdisk
 
 bin/nltk_data
+
+.env
