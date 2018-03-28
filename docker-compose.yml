@@ -16,7 +16,7 @@ services:
       - .:/app
     ports:
       - "8888:8888"
-    # env_file: .env
+    env_file: .env
     links:
       - mongo
       - redis
