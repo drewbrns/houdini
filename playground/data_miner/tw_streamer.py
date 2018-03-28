@@ -1,9 +1,11 @@
+import os
 from twython import TwythonStreamer
 
-APP_KEY = '8gwqTJfGUId1cPMeq7cWMs4cW'
-APP_SECRET = 'fWm4bHFk7WveYw4r22fjgWFBILzmd4PywOc9K3wrJDse8XXoNY'
-OAUTH_TOKEN = '144124443-sJya9WzRaHXh773f6wd77LzFTtG2db2zvWNhiy4q'
-OAUTH_TOKEN_SECRET = 'P0wSdeUeQYaXfv2qfcZ19pSyybNCHrorxrdTLwJorCRq0'
+APP_KEY = os.environ.get('APP_KEY', None)
+APP_SECRET = os.environ.get('APP_SECRET', None)
+OAUTH_TOKEN = os.environ.get('OAUTH_TOKEN', None)
+OAUTH_TOKEN_SECRET = os.environ.get('OAUTH_TOKEN_SECRET', None)
+FILENAME = os.environ.get('FILENAME', None)
 
 class MyStreamer(TwythonStreamer):
     def on_success(self, data):
