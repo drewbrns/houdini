@@ -9,6 +9,8 @@ OAUTH_TOKEN = os.environ.get('OAUTH_TOKEN', None)
 OAUTH_TOKEN_SECRET = os.environ.get('OAUTH_TOKEN_SECRET', None)
 FILENAME = os.environ.get('FILENAME', None)
 
+PA_WORDS = ['buy', 'recommend', 'hire', 'have', 'suggest', 'advise', 'want', 'need', 'purchase', 'wish']
+
 twitter = Twython(APP_KEY, APP_SECRET, OAUTH_TOKEN, OAUTH_TOKEN_SECRET)
 try:
     search_results = twitter.search(q='twitter', count=1)
