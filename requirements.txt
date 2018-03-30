@@ -1,9 +1,10 @@
-Fabric==1.14.0
+Flask==0.12.2
 nltk==3.2.5
 requests==2.18.4
 textblob==0.15.1
 twython==3.6.0
 rq==0.10.0
+redis==2.10.6
 numpy==1.14.2
 matplotlib==2.2.2
 scipy==1.0.0

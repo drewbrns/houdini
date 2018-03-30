@@ -29,3 +29,5 @@ Temporary Items
 bin/nltk_data
 
 .env
+
+__pycache__

@@ -14,5 +14,6 @@ RUN pip install -r requirements.txt
 ADD . /app/
 
 EXPOSE 8888
+EXPOSE 5000
 
-CMD ["./run_server.sh"]
+# CMD ["./run_server.sh"]
