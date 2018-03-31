@@ -14,8 +14,8 @@ app = Flask(__name__)
 
 @app.route('/api/v1/data', methods=['GET'])
 def get_data():
-    skip = request.args.get('skip', 0)
-    limit = request.args.get('limit', 10)
+    skip    = int(request.args.get('skip', 0))
+    limit   = int(request.args.get('limit', 10))
     api_key = request.headers.get('x-api-key', None)
 
     if api_key is not None and API_KEY is not None:
