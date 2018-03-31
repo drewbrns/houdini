@@ -50,9 +50,11 @@ def get_data():
         
         mongo_client.close()
 
-        return make_response(
+        resp = make_response(
             json_util.dumps(records), 200
         )
+        resp.mimetype = 'application/json'
+        return resp
     except Exception as e:
         return make_response(
             jsonify({'error': e}), 400
@@ -69,9 +71,11 @@ def get_stats():
         
         mongo_client.close()
 
-        return make_response(
-            json_util.dumps({'stats': {'count': count}}), 200
+        resp = make_response(
+            jsonify({'stats': {'count': count}}), 200
         )
+        resp.mimetype = 'application/json'
+        return resp        
     except Exception as e:
         return make_response(
             jsonify({'error': e}), 400
