@@ -1,0 +1,53 @@
+version: '3.2'
+
+services:
+  mongo:
+    image: mongo:3.4.10
+    ports:
+      - "27017:27017"
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+  api:
+    image: ampsersandlabs/houdini-api
+    build: .
+    command: python houdini/api.py
+    volumes:
+      - .:/app
+    ports:
+      - "5000:5000"
+    env_file: .env
+    links:
+      - mongo
+      - redis
+    depends_on:
+      - mongo
+      - redis
+  fetcher:
+    image: ampsersandlabs/houdini-fetcher
+    build: .
+    command: python houdini/fetch_data.py
+    volumes:
+      - .:/app
+    env_file: .env
+    links:
+      - mongo
+      - redis
+    depends_on:
+      - mongo
+      - redis
+  # worker:
+  #   image: ampsersandlabs/houdini
+  #   build: .
+  #   command: rq worker
+  #   volumes:      
+  #     - .:/app
+  #   # env_file: .env
+  #   links:
+  #     - mongo
+  #     - redis
+  #   depends_on:
+  #     - mongo
+  #     - redis
+
