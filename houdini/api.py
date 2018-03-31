@@ -4,6 +4,8 @@ from flask import make_response, request
 from pymongo import MongoClient
 from bson import json_util
 
+from functools import wraps
+
 
 API_KEY = os.environ.get('HOUDINI_API_KEY', None)
 MONGODB_URI = os.environ.get('MONGODB_URI', None)
@@ -11,34 +13,53 @@ MONGODB_URI = os.environ.get('MONGODB_URI', None)
 
 app = Flask(__name__)
 
+# Middleware
+def authenticate(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):                
+        api_key = request.headers.get('x-api-key', None)
+
+        if api_key is None:            
+            return make_response(
+                jsonify({'error': 'missing api key. check if `x-api-key` is defined in your header'}), 403
+            )
+
+        if api_key.lower() != API_KEY.lower():
+            return make_response(
+                jsonify({'error': 'Unauthorized access. Invalid api key please check in wiith admin.'}), 401
+            )
+        
+        return f(*args, **kwargs)
+    return decorated_function
+
+
+# Routes
 
 @app.route('/api/v1/data', methods=['GET'])
+@authenticate
 def get_data():
-    skip    = int(request.args.get('skip', 0))
-    limit   = int(request.args.get('limit', 10))
-    api_key = request.headers.get('x-api-key', None)
-
-    if api_key is not None and API_KEY is not None:
-        if api_key.lower() == API_KEY.lower():
-            mongo_client = MongoClient(MONGODB_URI)
-            db = mongo_client.houdini_db
-            records = db.data_lake.find({}).skip(skip).limit(limit)
-            records = list(records)
-            mongo_client.close()
-            return make_response(
-                json_util.dumps(records), 200
-            )
-        else:
-            return make_response(jsonify({'error': 'unauthorized access'}), 401)
-
-    return make_response(
-        jsonify({'error': 'authorization error. check if `x-api-key` is defined in your header'}), 401
+    try:
+        skip = int(request.args.get('skip', 0))
+        limit = int(request.args.get('limit', 10))
+        mongo_client = MongoClient(MONGODB_URI)
+        db = mongo_client.houdini_db
+        records = db.data_lake.find({}).skip(skip).limit(limit)
+        records = list(records)
+        mongo_client.close()
+        return make_response(
+            json_util.dumps(records), 200
         )
+    except Exception as e:
+        return make_response(
+            jsonify({'error': e}), 400
+        )
+
 
 @app.errorhandler(404)
 def not_found(error):
     return make_response(
         jsonify({'error': 'Not found'}), 404)
+
 
 
 if __name__ == '__main__':
