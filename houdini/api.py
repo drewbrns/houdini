@@ -41,11 +41,15 @@ def get_data():
     try:
         skip = int(request.args.get('skip', 0))
         limit = int(request.args.get('limit', 10))
+
         mongo_client = MongoClient(MONGODB_URI)
         db = mongo_client.houdini_db
+
         records = db.data_lake.find({}).skip(skip).limit(limit)
         records = list(records)
+        
         mongo_client.close()
+
         return make_response(
             json_util.dumps(records), 200
         )
@@ -53,6 +57,25 @@ def get_data():
         return make_response(
             jsonify({'error': e}), 400
         )
+
+@app.route('/api/v1/stats', methods=['GET'])
+@authenticate
+def get_stats():
+    try:
+        mongo_client = MongoClient(MONGODB_URI)
+        db = mongo_client.houdini_db
+
+        count = db.data_lake.find({}).count()
+        
+        mongo_client.close()
+
+        return make_response(
+            json_util.dumps({'stats': {'count': count}}), 200
+        )
+    except Exception as e:
+        return make_response(
+            jsonify({'error': e}), 400
+        )    
 
 
 @app.errorhandler(404)
