@@ -34,8 +34,8 @@ class Extractor():
 
     def validated_data(self):
         data = self.raw_data
-        if data['is_quote_status'] or data['user']['lang'].lower() == 'en':
-            raise Exception('Skip this tweet')        
+        if data['is_quote_status'] or data['user']['lang'].lower() == 'en' or data['retweeted_status'] is not None:
+            raise Exception('Skip this tweet')
         return {
             'created_at': self.clean_created_at(data['created_at']),
             'text': self.clean_text(data['text']),

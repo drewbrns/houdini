@@ -19,12 +19,12 @@ options = {
 }
 
 filters = [
-    'ipad', 'iphone', 'smartphone', 'smart phone', 'phone', 'mobile phone', 
+    'ipad', 'iphone', 'smartphone', 'smart phone', 'phone', 'mobile phone',
     'laptop', 'earphones', 'samsung', 'samsung galaxy s9', 'samsung s9+', 'galaxy s9', 'galaxy s9+',
-    'macbook pro', 'macbook air', 'macbook', 'galaxy note 8', 'samsung galaxy note 8', 'iphone x', 
+    'macbook pro', 'macbook air', 'macbook', 'galaxy note 8', 'samsung galaxy note 8', 'iphone x',
     'microsoft surface', 'microsoft surface pro', 'microsoft surface laptop', 'microsoft surface book',
-    'toyota', 'hyundai', 'ford', 'tesla', 'corolla', 'camry', 'totoya camry', 'toyota corolla', 'nissan', 
-    'beats by dre', 'samsung galaxy note 8.0', 
+    'toyota', 'hyundai', 'ford', 'tesla', 'corolla', 'camry', 'totoya camry', 'toyota corolla', 'nissan',
+    'beats by dre', 'samsung galaxy note 8.0',
 ]
 
 def run():
