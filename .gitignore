@@ -30,6 +30,6 @@ bin/nltk_data
 
 .env
 
-__pycache__
+__pycache__/
 
 .vscode
