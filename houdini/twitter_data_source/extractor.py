@@ -22,8 +22,7 @@ class Extractor():
                 if full is not None:
                     return full
 
-        elif extended_tweet is not None:          
-            print('extended_tweet is not none')  
+        elif extended_tweet is not None:
             full_text = extended_tweet.get('full_text', None)
             if full_text is not None:
                 return full_text
@@ -45,6 +44,7 @@ class Extractor():
     def clean_text(self, text):
         # replace any url found with domain of the url
         text = text.strip()
+        text.replace('\n', ' ').replace('\r', '').replace('  ', ' ')
         text = html.unescape(text)
 
         b = TextBlob(u"{}".format(text))
