@@ -20,10 +20,10 @@ class Extractor():
     def get_text(self):
         data = self.raw_data
         retweeted_data = data['retweeted_status']
-        if retweeted_data['expanded_tweet'] is not None:
-            return retweeted_data['expanded_tweet']['full_text']
-        elif data['expanded_text'] is not None:
-            return data['expanded_text']['full_text']
+        if retweeted_data['extended_tweet'] is not None:
+            return retweeted_data['extended_tweet']['full_text']
+        elif data['extended_tweet'] is not None:
+            return data['extended_tweet']['full_text']
         elif data['text'] is not None:
             return data['text']
         else:

@@ -18,7 +18,7 @@ class TweetFetcher(TwythonStreamer):
             )
             print ('[TweetFetcher] Tweet collected at: {}'.format(str(data['created_at'])))
         except Exception as e:
-            # print(data['text'])
+            print(data['retweeted_status'])
             # print(e)
             pass 
     
