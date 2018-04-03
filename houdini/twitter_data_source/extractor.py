@@ -19,15 +19,26 @@ class Extractor():
 
     def get_text(self):
         data = self.raw_data
-        retweeted_data = data['retweeted_status']
-        if retweeted_data['extended_tweet'] is not None:
-            return retweeted_data['extended_tweet']['full_text']
-        elif data['extended_tweet'] is not None:
-            return data['extended_tweet']['full_text']
-        elif data['text'] is not None:
-            return data['text']
-        else:
-            raise Exception('Tweet must containt text')         
+        retweeted_data = data.get('retweeted_status', None)    
+        extended_tweet = data.get('extended_tweet', None)    
+        text = data.get('text', None)        
+
+        if retweeted_data is not None:
+            extended = retweeted_data.get('extended_tweet', None)
+            if extended is not None:
+                full = extended.get('full_text', None)
+                if full is not None:
+                    return full
+
+        if extended_tweet is not None:            
+            full_text = extended_tweet.get('full_text', None)
+            if full_text is not None:
+                return full_text
+
+        if text is not None:
+            return text
+        
+        raise Exception('Tweet must contain text')         
 
     def clean_text(self, text):
         # replace any url found with domain of the url
