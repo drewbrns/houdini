@@ -18,8 +18,8 @@ class TweetFetcher(TwythonStreamer):
             )
             print ('[TweetFetcher] Tweet collected at: {}'.format(str(data['created_at'])))
         except Exception as e:
-            print(data['retweeted_status'])
-            # print(e)
+            # print(data['retweeted_status'])
+            print(e)
             pass 
     
     def on_error(self, status_code, data):

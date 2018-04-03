@@ -1,5 +1,6 @@
 import re
 import time 
+import html
 from textblob import TextBlob
 
 
@@ -7,15 +8,6 @@ class Extractor():
     
     def __init__(self, raw_data):
         self.raw_data = raw_data
-            
-    def clean_created_at(self, created_at):
-        # convert `created_at` to unix timestamp
-        # Fri Mar 30 17:53:28 +0000 2018
-        try:
-            parsed = time.strptime(created_at, '%a %b %d %H:%M:%S +0000 %Y')        
-            return int(time.mktime( parsed )) - time.timezone
-        except Exception as e:
-            raise e
 
     def get_text(self):
         data = self.raw_data
@@ -30,18 +22,31 @@ class Extractor():
                 if full is not None:
                     return full
 
-        if extended_tweet is not None:            
+        elif extended_tweet is not None:          
+            print('extended_tweet is not none')  
             full_text = extended_tweet.get('full_text', None)
             if full_text is not None:
                 return full_text
 
-        if text is not None:
+        elif text is not None:
             return text
         
         raise Exception('Tweet must contain text')         
+            
+    def clean_created_at(self, created_at):
+        # convert `created_at` to unix timestamp
+        # Fri Mar 30 17:53:28 +0000 2018
+        try:
+            parsed = time.strptime(created_at, '%a %b %d %H:%M:%S +0000 %Y')        
+            return int(time.mktime( parsed )) - time.timezone
+        except Exception as e:
+            raise e        
 
     def clean_text(self, text):
         # replace any url found with domain of the url
+        text = text.strip()
+        text = html.unescape(text)
+
         b = TextBlob(u"{}".format(text))
         if b.detect_language() != 'en':
             raise Exception('Tweet must be english')
