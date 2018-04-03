@@ -44,7 +44,7 @@ class Extractor():
     def clean_text(self, text):
         # replace any url found with domain of the url
         text = text.strip()
-        text.replace('\n', ' ').replace('\r', '').replace('  ', ' ')
+        text = text.replace('\n', ' ').replace('\r', '').replace('  ', ' ')
         text = html.unescape(text)
 
         b = TextBlob(u"{}".format(text))
