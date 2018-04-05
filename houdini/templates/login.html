@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% block title %} Login - Houdini{% endblock %} 
+{% block content %}
+<div class="pace  pace-inactive">
+    <div class="pace-progress" data-progress-text="100%" data-progress="99" style="transform: translate3d(100%, 0px, 0px);">
+        <div class="pace-progress-inner"></div>
+    </div>
+    <div class="pace-activity"></div>
+</div>
+<div class="app">
+    <div class="layout">
+        <!-- Side Nav START -->
+
+        <!-- Side Nav END -->
+
+        <!-- Page Container START -->
+        <div class="page-container">
+            <!-- Login Container START -->
+            <div class="authentication">
+                <div class="sign-in">
+                    <div class="row no-mrg-horizon">
+                        <div class="col-md-8 no-pdd-horizon d-none d-md-block">
+                            <div class="full-height bg login-bg" style="background-image: url({{ url_for('static', filename='img/login-bg.jpg') }})">
+                                <!-- <div class="img-caption">
+                                    <h1 class="caption-title">We make spectacular</h1>
+                                    <p class="caption-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
+                                        has been the industry's standard dummy text ever since the 1500s.</p>
+                                </div> -->
+                            </div>
+                        </div>
+                        <div class="col-md-4 no-pdd-horizon">
+                            <div class="full-height bg-white height-100">
+                                <div class="vertical-align full-height pdd-horizon-70">
+                                    <div class="table-cell">
+                                        <div class="pdd-horizon-15">
+                                            <h2>Login</h2>
+                                            <p class="mrg-btm-15 font-size-13">Please enter your user name and password to login</p>
+                                            <form>
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" placeholder="User name">
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="password" class="form-control" placeholder="Password">
+                                                </div>
+                                                <!-- <div class="checkbox font-size-12">
+                                                    <input id="agreement" name="agreement" type="checkbox">
+                                                    <label for="agreement">Keep Me Signed In</label>
+                                                </div> -->
+                                                <button class="btn btn-info">Login</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="login-footer">
+                                    <a class="footer-logo" href="">Houdini</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Login Container END -->
+
+        </div>
+        <!-- Page Container END -->
+
+    </div>
+</div>
+{% endblock %}
