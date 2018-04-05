@@ -1,5 +1,5 @@
 import os
-from flask import Flask, jsonify, abort
+from flask import Flask, render_template, jsonify, abort
 from flask import make_response, request
 from pymongo import MongoClient
 from bson import json_util
@@ -34,6 +34,14 @@ def authenticate(f):
 
 
 # Routes
+
+@app.route('/')
+def home():
+    return render_template('home.html')
+
+@app.route('/login/')
+def login():
+    return render_template('login.html')
 
 @app.route('/api/v1/data', methods=['GET'])
 @authenticate
@@ -86,7 +94,6 @@ def get_stats():
 def not_found(error):
     return make_response(
         jsonify({'error': 'Not found'}), 404)
-
 
 
 if __name__ == '__main__':
