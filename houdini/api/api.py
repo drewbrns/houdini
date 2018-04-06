@@ -1,48 +1,67 @@
 import os
 from flask import Flask, render_template, jsonify, abort
-from flask import make_response, request
+from flask import make_response, request, session
+from flask import g, redirect, url_for
 from pymongo import MongoClient
 from bson import json_util
 
-from functools import wraps
-
-
-API_KEY = os.environ.get('HOUDINI_API_KEY', None)
-MONGODB_URI = os.environ.get('MONGODB_URI', None)
+from middleware import authenticate, login_required
+from helpers import login_user
 
 
 app = Flask(__name__)
+app.config.from_object('settings')
 
-# Middleware
-def authenticate(f):
-    @wraps(f)
-    def decorated_function(*args, **kwargs):                
-        api_key = request.headers.get('x-api-key', None)
+MONGODB_URI = app.config['MONGODB_URI']
+SECRET_KEY = app.config['API_KEY']
 
-        if api_key is None:            
-            return make_response(
-                jsonify({'error': 'missing api key. check if `x-api-key` is defined in your header'}), 403
-            )
+### Routes
 
-        if api_key.lower() != API_KEY.lower():
-            return make_response(
-                jsonify({'error': 'Unauthorized access. Invalid api key please check in wiith admin.'}), 401
-            )
-        
-        return f(*args, **kwargs)
-    return decorated_function
+@app.before_request
+def before_request():
+    g.user = session.get('username', None)
 
 
-# Routes
-
+# Index Page
 @app.route('/')
+@login_required   # Uncomment this when you implement login action
 def home():
-    return render_template('home.html')
+    return render_template('home.html')    
 
-@app.route('/login/')
+
+# Login on GET Request 
+@app.route('/login', methods=['GET', 'POST'])
 def login():
-    return render_template('login.html')
+    
+    if request.method == 'POST':
+        
+        username = request.form.get('username', None)
+        password = request.form.get('password', None)
+        
+        try:
+            user = login_user(username, password)
+            g.user = user['username']
+            session['username'] = user['username']
+            return redirect(url_for('home'))
+        except Exception as e:
+            return render_template(
+                'login.html', result={
+                    'error': e, 
+                    'username': username
+                    }
+                )
+    else:      
+        return render_template('login.html')
+         
 
+@app.route('/logout')
+def logout():
+   # remove the username from the session if it is there
+   session.pop('username', None)
+   return redirect(url_for('login'))
+
+
+# API
 @app.route('/api/v1/data', methods=['GET'])
 @authenticate
 def get_data():
