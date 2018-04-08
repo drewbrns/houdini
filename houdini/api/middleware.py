@@ -6,7 +6,7 @@ from flask import g, redirect, url_for
 
 app = Flask(__name__)
 app.config.from_object('settings')
-SECRET_KEY = app.config['API_KEY']
+SECRET_KEY = app.config['SECRET_KEY']
 
 
 # Middleware

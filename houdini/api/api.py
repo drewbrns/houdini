@@ -2,6 +2,7 @@ import os
 from flask import Flask, render_template, jsonify, abort
 from flask import make_response, request, session
 from flask import g, redirect, url_for
+from flask_session import Session
 from pymongo import MongoClient
 from bson import json_util
 
@@ -10,10 +11,15 @@ from helpers import login_user, json_response
 
 
 app = Flask(__name__)
+app.url_map.strict_slashes = False
 app.config.from_object('settings')
 
+SESSION_TYPE = 'mongodb'
+app.config.from_object(__name__)
+Session(app)
+
 MONGODB_URI = app.config['MONGODB_URI']
-SECRET_KEY = app.config['API_KEY']
+SECRET_KEY = app.config['SECRET_KEY']
 
 ### Routes
 
@@ -24,8 +30,8 @@ def before_request():
 
 # Index Page
 @app.route('/')
-# @login_required   # Uncomment this when you implement login action
-# @authenticate
+@login_required   # Uncomment this when you implement login action
+@authenticate
 def home():
     return render_template('home.html')    
 
@@ -33,7 +39,6 @@ def home():
 # Login on GET Request 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    
     if request.method == 'POST':        
         username = request.form.get('username', None)
         password = request.form.get('password', None)
