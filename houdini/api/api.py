@@ -34,11 +34,9 @@ def home():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     
-    if request.method == 'POST':
-        
+    if request.method == 'POST':        
         username = request.form.get('username', None)
         password = request.form.get('password', None)
-        
         try:
             user = login_user(username, password)
             g.user = user['username']
@@ -48,7 +46,7 @@ def login():
         except Exception as e:
             return render_template(
                 'login.html', result={
-                    'error': e, 
+                    'error': str(e), 
                     'username': username
                     }
                 )
@@ -85,7 +83,7 @@ def get_data():
         )
     except Exception as e:
         return make_response(
-            jsonify({'error': e}), 400
+            jsonify({'error': str(e)}), 400
         )
 
 
@@ -103,9 +101,8 @@ def get_stats():
             200
         )     
     except Exception as e:
-        print(e)
         return json_response(
-            {'error': ''},
+            {'error': str(e)},
             400
         )
 
@@ -117,15 +114,14 @@ def get_pa_words():
         mongo_client = MongoClient(MONGODB_URI)
         db = mongo_client.houdini_db
         words = db.pa_words.find({})
-        words = [ entry['word'].lower() for entry in words ]        
+        words = [ entry['word'].lower() for entry in set(words) ]        
         return json_response(
             {'pa_words': words},
             200
         )
-    except Exception as e:
-        print(e)
+    except Exception as e:        
         return make_response(
-            jsonify({'error': ''}), 400
+            jsonify({'error': str(e)}), 400
         )   
 
 
@@ -191,9 +187,8 @@ def get_po_words():
             200
         )
     except Exception as e:
-        print(e)
         return make_response(
-            jsonify({'error': ''}), 400
+            jsonify({'error': str(e)}), 400
         )   
 
 
