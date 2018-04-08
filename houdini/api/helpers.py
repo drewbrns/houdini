@@ -1,5 +1,7 @@
 import jwt
 from flask import Flask
+from flask import jsonify, make_response
+
 from flask_bcrypt import Bcrypt
 from pymongo import MongoClient
 
@@ -56,3 +58,10 @@ def login_user(username, password):
         }
     else:
         raise Exception('invalid username / password')    
+
+def json_response(data, status):
+    resp = make_response(
+        jsonify(data), status
+    )
+    resp.mimetype = 'application/json'
+    return resp     
