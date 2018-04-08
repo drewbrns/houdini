@@ -33,7 +33,29 @@ def before_request():
 @login_required   # Uncomment this when you implement login action
 @authenticate
 def home():
-    return render_template('home.html')    
+
+    mongo_client = MongoClient(MONGODB_URI)
+    db = mongo_client.houdini_db
+
+    data = {}
+    data['count'] = db.data_lake.find({}).count()
+
+    pawords = db.pa_words.find({})
+    data['pawords'] = [ entry['word'].lower() for entry in pawords ]
+
+    powords = db.po_words.find({})
+    data['powords'] = [ entry['word'].lower() for entry in powords ]
+
+    page = int(request.args.get('page', 0))
+    records = db.data_lake.find({}).skip(page).limit(10)
+    records = list(records)
+    data['records'] = json_util.dumps(records)
+    page = page + 10
+    data['page'] = page
+
+    mongo_client.close()
+
+    return render_template('home.html', data=data)
 
 
 # Login on GET Request 
@@ -50,7 +72,7 @@ def login():
             return redirect(url_for('home'))
         except Exception as e:
             return render_template(
-                'login.html', result={
+                'login.html', data={
                     'error': str(e), 
                     'username': username
                     }
@@ -63,6 +85,7 @@ def login():
 def logout():
    # remove the username from the session if it is there
    session.pop('username', None)
+   session.pop('jwt', None)
    return redirect(url_for('login'))
 
 
@@ -119,7 +142,7 @@ def get_pa_words():
         mongo_client = MongoClient(MONGODB_URI)
         db = mongo_client.houdini_db
         words = db.pa_words.find({})
-        words = [ entry['word'].lower() for entry in set(words) ]        
+        words = [ entry['word'].lower() for entry in words ]        
         return json_response(
             {'pa_words': words},
             200
