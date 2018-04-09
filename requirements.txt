@@ -16,3 +16,4 @@ tensorflow==1.6.0
 pymongo==3.6.1
 PyJWT==1.6.1
 flask-bcrypt==0.7.1
+Flask-Session==0.3.1
