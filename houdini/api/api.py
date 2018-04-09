@@ -24,7 +24,7 @@ def before_request():
 
 # Index Page
 @app.route('/')
-@login_required   # Uncomment this when you implement login action
+# @login_required   # Uncomment this when you implement login action
 def home():
     return render_template('home.html')    
 
