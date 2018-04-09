@@ -47,7 +47,9 @@ def home():
     data['powords'] = [ entry['word'].lower() for entry in powords ]
 
     page = int(request.args.get('page', 0))
-    records = db.data_lake.find({}).skip((page * 10)).limit(10)
+    limit = 10 
+    skip = page * limit
+    records = db.data_lake.find({}).skip(skip).limit(limit)
     records = list(records)
     data['records'] = json_util.dumps(records)
     page = page + 1
