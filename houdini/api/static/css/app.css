@@ -9528,3 +9528,7 @@ glyphs.character-mapping {
   float: right;
   text-align: right;
 }
+
+.card-footer {
+  border-top: 1px solid rgb(230, 236, 245) !important
+}

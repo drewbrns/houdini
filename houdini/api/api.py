@@ -9,6 +9,7 @@ from bson import json_util
 from middleware import authenticate, login_required
 from helpers import login_user, json_response
 
+from datetime import datetime, time
 
 app = Flask(__name__)
 app.url_map.strict_slashes = False
@@ -26,7 +27,6 @@ SECRET_KEY = app.config['SECRET_KEY']
 @app.before_request
 def before_request():
     g.user = session.get('username', None)
-
 
 # Index Page
 @app.route('/')
@@ -54,9 +54,8 @@ def home():
     data['page'] = page
 
     mongo_client.close()
-
-    return render_template('home.html', data=data)
-
+                
+    return render_template('home.html', data=data, records=records, username= g.user)
 
 # Login on GET Request 
 @app.route('/login', methods=['GET', 'POST'])
@@ -267,8 +266,6 @@ def po_word():
             {'error': 'parameter `word` is required.'},
             400
         )
-
-
 
 @app.errorhandler(404)
 def not_found(error):
