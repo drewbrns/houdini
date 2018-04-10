@@ -4173,9 +4173,9 @@ iframe {
 
 .widget-feed .feed-action>li>a {
   display: block;
-  color: #888da8;
-  font-size: 16px;
-  font-weight: 500;
+  /* color: #888da8; */
+  font-size: 14px;
+  /* font-weight: 500; */
   padding: 10px 25px 10px 0px;
 }
 
@@ -9517,4 +9517,18 @@ glyphs.character-mapping {
 
 .navbar-brand {
   margin-top: 0.7rem;
+}
+
+.dataTables_info {
+  clear: both;
+  float: left;
+}
+
+.dataTables_pagination {
+  float: right;
+  text-align: right;
+}
+
+.card-footer {
+  border-top: 1px solid rgb(230, 236, 245) !important
 }

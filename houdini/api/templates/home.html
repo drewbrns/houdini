@@ -1,6 +1,4 @@
-{% extends "base.html" %}
-{% block title %} Data Collection - Houdini{% endblock %} 
-{% block content %}
+{% extends "base.html" %} {% block title %} Data Collection - Houdini{% endblock %} {% block content %}
 <div class="pace  pace-inactive">
     <div class="pace-progress" data-progress-text="100%" data-progress="99" style="transform: translate3d(100%, 0px, 0px);">
         <div class="pace-progress-inner"></div>
@@ -36,13 +34,11 @@
                             <a href="" class="dropdown-toggle" data-toggle="dropdown">
                                 <img class="profile-img img-fluid" src="{{ url_for('static', filename='img/user.png') }}" alt="">
                                 <div class="user-info">
-                                    <span class="name pdd-right-5">Admin</span>
+                                    <span class="name pdd-right-5">{{ username }}</span>
                                     <i class="ti-angle-down font-size-10"></i>
                                 </div>
                             </a>
                         </li>
-
-
                     </ul>
                 </div>
             </div>
@@ -57,7 +53,7 @@
                             <div class="card">
                                 <div class="card-block">
                                     <div class="inline-block">
-                                        <h1 class="no-mrg-vertical">168.2K</h1>
+                                        <h1 class="no-mrg-vertical">{{ data['count']+1 }}</h1>
                                         <p>Data Collected</p>
                                     </div>
                                     <!-- <div class="pdd-top-25 inline-block pull-right">
@@ -73,9 +69,7 @@
 
                             <div class="card">
                                 <div class="card-heading border bottom">
-                                    <h4 class="card-title">Purchase Actions
-                                        <a class="add-purchase-action pull-right" href="">+</a>
-                                    </h4>
+                                    <h4 class="card-title">Purchase Actions</h4>
                                 </div>
                                 <div class="card-body">
                                     <div class="inline-block">
@@ -136,37 +130,35 @@
 
                         </div>
                         <div class="col-lg-9">
-
                             <div class="card">
                                 <div class="card-heading border bottom">
                                     <h4 class="card-title">Data</h4>
+
+
                                 </div>
-                                <div class="widget-feed">
+                                <div class="widget-feed ml-4 mr-4">
                                     <ul class="list-info overflow-y-auto relative">
-                                        <li class="border bottom mrg-btm-10">
+
+                                        {% for record in records %}
+
+                                        <li class="{{'border bottom mrg-btm-10' if not loop.last}}">
                                             <div class="pdd-vertical-10">
                                                 <span class="thumb-img bg-primary">
                                                     <span class="text-white">
                                                         <img src="{{ url_for('static', filename='img/twitter-icon.png') }}" class="source-icon" />
                                                     </span>
                                                 </span>
+
                                                 <div class="info">
-                                                    <a href="" class="text-link">
-                                                        <span class="title">
-                                                            <b class="font-size-15">Twitter for android</b>
-                                                        </span>
-                                                    </a>
-                                                    <span class="sub-title">5 mins ago</span>
+                                                    <span class="title">
+                                                        <b class="font-size-15">{{ record['source'] }}</b>
+                                                    </span>
+                                                    <span class="sub-title">{{ record['created_at'] }}</span>
                                                 </div>
                                                 <div class="mrg-top-10">
-                                                    <p class="no-mrg-btm">Today marks 3 years of USA/Saudi war crimes against Yemen, the poorest
-                                                        nation in the Middle East, which has created the largest humanitarian
-                                                        crisis since WWii. 10,000+ civilians have been bombed to death including
-                                                        12 year-old #Ishraq. Millions are starving to death. #USAWarCrimes
-                                                        https://t.co/zSFuhr12nx
-                                                    </p>
+                                                    <p class="no-mrg-btm">{{ record['text'] }}</p>
                                                 </div>
-                                                <ul class="feed-action">
+                                                <!-- <ul class="feed-action">
                                                     <li>
                                                         <a class="btn" href="">
                                                             <span>Action 1</span>
@@ -177,47 +169,30 @@
                                                             <span>Action 2</span>
                                                         </a>
                                                     </li>
-                                                </ul>
-                                            </div>
-                                        </li>
-                                        <li class="border bottom mrg-btm-10">
-                                            <div class="pdd-vertical-10">
-                                                <span class="thumb-img bg-primary">
-                                                    <span class="text-white">
-                                                        <img src="{{ url_for('static', filename='img/twitter-icon.png') }}" class="source-icon" />
-                                                    </span>
-                                                </span>
-                                                <div class="info">
-                                                    <a href="" class="text-link">
-                                                        <span class="title">
-                                                            <b class="font-size-15">Facebook</b>
-                                                        </span>
-                                                    </a>
-                                                    <span class="sub-title">5 mins ago</span>
-                                                </div>
-                                                <div class="mrg-top-15">
-                                                    <p>PUBG MOBILE:It's time for the CHICKEN DINNER. https://t.co/4nwfZEvKZi</p>
-                                                </div>
-                                                <ul class="feed-action">
-                                                    <li>
-                                                        <a class="btn" href="">
-                                                            <span>Action 1</span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="">
-                                                            <span>Action 2</span>
-                                                        </a>
-                                                    </li>
-                                                </ul>
+                                                </ul> -->
                                             </div>
                                         </li>
 
-
+                                        {% endfor %}
                                     </ul>
                                 </div>
-                            </div>
 
+                                <div class="card-footer dataTables_wrapper">
+                                    <div class="dataTables_info" id="dt-opt_info" role="status" aria-live="polite">Showing Page
+                                        <b>{{data.page-1}}</b> of
+                                        <b>{{((data.count)/10) | round(1) | int}}</b> pages
+                                        <b>| {{data.count+1}}</b> entries</div>
+                                    <div class="dataTables_paginate paging_simple_numbers" id="dt-opt_paginate">
+                                        <a href="{{ url_for('home', page=data.page-2) }}" disabled="{{'disabled' if data.page<=1}}" class="paginate_button previous {{'disabled' if data.page<=1}}">Previous</a>
+                                        <!-- <span>
+                                            <a class="paginate_button current" aria-controls="dt-opt" data-dt-idx="1" tabindex="0">1</a>
+                                            <a class="paginate_button" aria-controls="dt-opt" data-dt-idx="2" tabindex="0">2</a>
+                                        </span> -->
+                                        <a href="{{ url_for('home', page=data.page) }}" disabled="{{'disabled' if data.count/10<data.page*10}}" class="paginate_button next {{'disabled' if data.count/10<data.page}}">Next</a>
+                                    </div>
+                                </div>
+
+                            </div>
                         </div>
                     </div>
 

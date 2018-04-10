@@ -23,7 +23,7 @@ services:
   api:
     image: ampsersandlabs/houdini-api
     build: .
-    command: python houdini/api.py
+    command: python houdini/api/api.py
     volumes:
       - .:/app
     ports:
