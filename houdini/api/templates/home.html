@@ -53,7 +53,7 @@
                             <div class="card">
                                 <div class="card-block">
                                     <div class="inline-block">
-                                        <h1 class="no-mrg-vertical">{{ data['count'] }}</h1>
+                                        <h1 class="no-mrg-vertical">{{ data['count']+1 }}</h1>
                                         <p>Data Collected</p>
                                     </div>
                                     <!-- <div class="pdd-top-25 inline-block pull-right">
@@ -174,58 +174,21 @@
                                         </li>
 
                                         {% endfor %}
-
-                                        <!-- <li class=" bottom mrg-btm-10">
-                                            <div class="pdd-vertical-10">
-                                                <span class="thumb-img bg-primary">
-                                                    <span class="text-white">
-                                                        <img src="{{ url_for('static', filename='img/twitter-icon.png') }}" class="source-icon" />
-                                                    </span>
-                                                </span>
-                                                <div class="info">
-                                                    <a href="" class="text-link">
-                                                        <span class="title">
-                                                            <b class="font-size-15">Facebook</b>
-                                                        </span>
-                                                    </a>
-                                                    <span class="sub-title">5 mins ago</span>
-                                                </div>
-                                                <div class="mrg-top-15">
-                                                    <p>PUBG MOBILE:It's time for the CHICKEN DINNER. https://t.co/4nwfZEvKZi</p>
-                                                </div>
-                                                <ul class="feed-action">
-                                                    <li>
-                                                        <a class="btn" href="">
-                                                            <span>Action 1</span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="">
-                                                            <span>Action 2</span>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </li> -->
-
-
                                     </ul>
                                 </div>
 
                                 <div class="card-footer dataTables_wrapper">
-                                    <div class="dataTables_info" id="dt-opt_info" role="status" aria-live="polite">Showing
-                                        <b>{{data.page - 9}}</b> to
-                                        <b>{{data.page}}</b> of
-                                        <b>{{(data.count+1)/10}}</b> pages
+                                    <div class="dataTables_info" id="dt-opt_info" role="status" aria-live="polite">Showing Page
+                                        <b>{{data.page-1}}</b> of
+                                        <b>{{((data.count)/10) | round(1) | int}}</b> pages
                                         <b>| {{data.count+1}}</b> entries</div>
                                     <div class="dataTables_paginate paging_simple_numbers" id="dt-opt_paginate">
-                                        <a href="{{ url_for('home', page=data.page-20) }}" disabled="{{'disabled' if data.page<=10}}" class="paginate_button previous {{'disabled' if data.page<=10}}">Previous</a>
+                                        <a href="{{ url_for('home', page=data.page-2) }}" disabled="{{'disabled' if data.page<=1}}" class="paginate_button previous {{'disabled' if data.page<=1}}">Previous</a>
                                         <!-- <span>
                                             <a class="paginate_button current" aria-controls="dt-opt" data-dt-idx="1" tabindex="0">1</a>
                                             <a class="paginate_button" aria-controls="dt-opt" data-dt-idx="2" tabindex="0">2</a>
                                         </span> -->
-                                        <a href="{{ url_for('home', page=data.page) }}" disabled="{{'disabled' if data.count/10<data.page}}" class="paginate_button next {{'disabled' if data.count/10<data.page}}"
-                                            >Next</a>
+                                        <a href="{{ url_for('home', page=data.page) }}" disabled="{{'disabled' if data.count/10<data.page*10}}" class="paginate_button next {{'disabled' if data.count/10<data.page}}">Next</a>
                                     </div>
                                 </div>
 
