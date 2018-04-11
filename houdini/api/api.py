@@ -1,4 +1,5 @@
 import os
+import time
 from flask import Flask, render_template, jsonify, abort
 from flask import make_response, request, session
 from flask import g, redirect, url_for
@@ -8,8 +9,6 @@ from bson import json_util
 
 from middleware import authenticate, login_required
 from helpers import login_user, json_response
-
-from datetime import datetime, time
 
 app = Flask(__name__)
 app.url_map.strict_slashes = False
@@ -270,8 +269,8 @@ def po_word():
         )
 
 @app.template_filter('readable_date')
-def readable_date_filter(time):
-    return time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time))
+def readable_date_filter(value):
+    return time.strftime('%a, %b %d %Y | %-I:%M:%S %p', time.localtime(value))
 
 @app.errorhandler(404)
 def not_found(error):
