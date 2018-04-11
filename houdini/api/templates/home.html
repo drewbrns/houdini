@@ -28,7 +28,6 @@
                         </div>
                     </div>
 
-
                     <ul class="nav-right">
                         <li class="user-profile dropdown">
                             <a href="" class="dropdown-toggle" data-toggle="dropdown">
@@ -153,23 +152,28 @@
                                                     <span class="title">
                                                         <b class="font-size-15">{{ record['source'] }}</b>
                                                     </span>
-                                                    <span class="sub-title">{{ record['created_at'] }}</span>
+                                                    <span class="sub-title">{{ record['created_at'] | readable_date }}</span>
                                                 </div>
                                                 <div class="mrg-top-10">
                                                     <p class="no-mrg-btm">{{ record['text'] }}</p>
                                                 </div>
-                                                <!-- <ul class="feed-action">
+                                                <ul class="feed-action mt-2">
                                                     <li>
-                                                        <a class="btn" href="">
-                                                            <span>Action 1</span>
+                                                        <a class="btn btn-sm btn-default btn-inverse btn-rounded" href="">
+                                                            <span>Purchase Intent</span>
                                                         </a>
                                                     </li>
                                                     <li>
-                                                        <a href="">
-                                                            <span>Action 2</span>
+                                                        <a class="btn btn-sm btn-default btn-inverse btn-rounded" href="">
+                                                            <span>Non Purchase Intent</span>
                                                         </a>
                                                     </li>
-                                                </ul> -->
+                                                    <li>
+                                                        <a class="btn btn-sm btn-default btn-inverse btn-rounded" href="">
+                                                            <span>Discard</span>
+                                                        </a>
+                                                    </li>
+                                                </ul>
                                             </div>
                                         </li>
 

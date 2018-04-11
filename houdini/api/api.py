@@ -269,6 +269,10 @@ def po_word():
             400
         )
 
+@app.template_filter('readable_date')
+def readable_date_filter(time):
+    return time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time))
+
 @app.errorhandler(404)
 def not_found(error):
     return json_response(
