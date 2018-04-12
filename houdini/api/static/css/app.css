@@ -4176,16 +4176,16 @@ iframe {
   /* color: #888da8; */
   font-size: 14px;
   /* font-weight: 500; */
-  padding: 10px 25px 10px 0px;
+  /* padding: 10px 25px 10px 0px; */
 }
 
-.widget-feed .feed-action>li>a:hover, .widget-feed .feed-action>li>a:focus {
+/* .widget-feed .feed-action>li>a:hover, .widget-feed .feed-action>li>a:focus {
   color: #515365;
-}
+} */
 
-.widget-feed .feed-action>li.active a {
+/* .widget-feed .feed-action>li.active a {
   color: #515365;
-}
+} */
 
 .widget-feed .comment .comment-item {
   padding: 30px 0px;
@@ -9531,4 +9531,8 @@ glyphs.character-mapping {
 
 .card-footer {
   border-top: 1px solid rgb(230, 236, 245) !important
+}
+
+a .disabled {
+  pointer-events: none;
 }
