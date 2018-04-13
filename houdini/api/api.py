@@ -6,6 +6,7 @@ from flask import g, redirect, url_for
 from flask_session import Session
 from pymongo import MongoClient
 from bson import json_util
+from bson.objectid import ObjectId
 
 from middleware import authenticate, login_required
 from helpers import login_user, json_response
@@ -104,11 +105,12 @@ def get_data():
         records = list(records)
         
         mongo_client.close()
-
-        return json_response(
+        resp = make_response(
             json_util.dumps(records), 
             200
         )
+        resp.mimetype = 'application/json'
+        return resp
     except Exception as e:
         return make_response(
             jsonify({'error': str(e)}), 400
@@ -267,6 +269,23 @@ def po_word():
             {'error': 'parameter `word` is required.'},
             400
         )
+
+
+@app.route('/api/v1/annotate/<doc_id>', methods=['POST'])
+@authenticate
+def annotate(doc_id):
+    mongo_client = MongoClient(MONGODB_URI)
+    db = mongo_client.houdini_db
+    a_class = request.form.get('class', None)
+
+    if doc_id and a_class:
+        a_class = a_class.strip()        
+        db.data_lake.update_one({'_id':ObjectId(doc_id)}, {'$set': {'class': a_class}})
+        return json_response({'': ''}, 204)        
+    else:
+        return json_response({'error': 'parameter `class` is required.'}, 400)
+
+
 
 @app.template_filter('readable_date')
 def readable_date_filter(value):
