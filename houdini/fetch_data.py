@@ -31,14 +31,18 @@ def run():
     )
     client = MongoClient(options['MONGODB_URI'])
     db = client.houdini_db
-    filters = []
-    add_to_filters = filters.append
 
-    for verb in pa_words:
-        for obj in po_words:
-            add_to_filters(verb + ' ' + obj)
+    beach_filter = ['want beach maldives', 'want beach caribbean', 'travel beach maldives', 'recommend beach maldives']
+    food_filter  = ['want pizza', 'purchase pizza', 'buy pizza', 'recommend pizza', 'want dinner', 'buy dinner', 'buy lunch', 'purchase lunch', 'obtain lunch']
+    hour_filter  = ['need hour', 'need year', 'purchase hour', 'need peace', 'want combat', 'desire combat', 'wish combat']
+    phone_filter = ['suggest phone', 'buy phone', 'want phone', 'buy iphone', 'buy ipad', 'purchase ipad', 'purchase iphone']
+    peace_filter = ['obtain peace', 'recommend peace', 'desire peace', 'need peace']
 
-    fetcher.fetch(filters, db)
+    fetcher.fetch( beach_filter, db )
+    fetcher.fetch( food_filter , db )
+    fetcher.fetch( hour_filter , db )
+    fetcher.fetch( phone_filter, db )
+    fetcher.fetch( peace_filter, db )
 
 
 if __name__ == '__main__':
