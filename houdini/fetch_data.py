@@ -38,11 +38,8 @@ def run():
     phone_filter = ['suggest phone', 'buy phone', 'want phone', 'buy iphone', 'buy ipad', 'purchase ipad', 'purchase iphone']
     peace_filter = ['obtain peace', 'recommend peace', 'desire peace', 'need peace']
 
-    fetcher.fetch( beach_filter, db )
-    fetcher.fetch( food_filter , db )
-    fetcher.fetch( hour_filter , db )
-    fetcher.fetch( phone_filter, db )
-    fetcher.fetch( peace_filter, db )
+    filters = beach_filter + food_filter + hour_filter + phone_filter + peace_filter    
+    fetcher.fetch( filters , db )
 
 
 if __name__ == '__main__':
