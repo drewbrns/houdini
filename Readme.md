@@ -1,6 +1,6 @@
 # Houdini - The Research
 
-An exploration into datascience and machine learning, a research into figuring out how to determine purchase intent using from a social feed using maching learning. It is largely based on the research paper [Identifying Purchase Intent from Social Posts](https://ojs.aaai.org/index.php/ICWSM/article/view/14505) by Vineet Gupta, Devesh Varshney, Harsh Jhamtani, Deepam Kedia and Shweta Karwa.
+An exploration into datascience and machine learning, research into figuring out how to determine purchase intent from social posts, largely based on the research paper [Identifying Purchase Intent from Social Posts](https://ojs.aaai.org/index.php/ICWSM/article/view/14505) by Vineet Gupta, Devesh Varshney, Harsh Jhamtani, Deepam Kedia and Shweta Karwa.
 
 ## Getting Started
 
