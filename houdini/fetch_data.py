@@ -39,7 +39,7 @@ def run():
     peace_filter = ['obtain peace', 'recommend peace', 'desire peace', 'need peace']
 
     filters = beach_filter + food_filter + hour_filter + phone_filter + peace_filter    
-    fetcher.fetch( filters , db )
+    fetcher.fetch(filters, db)
 
 
 if __name__ == '__main__':

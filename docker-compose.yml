@@ -6,7 +6,7 @@ services:
     ports:
       - "27017:27017"
   notebook:
-    image: ampsersandlabs/houdini
+    image: drewbrns/houdini
     command: ./start_notebook.sh
     build: .
     volumes:
@@ -21,7 +21,7 @@ services:
     depends_on:
       - mongo
   api:
-    image: ampsersandlabs/houdini-api
+    image: drewbrns/houdini-api
     build: .
     command: python houdini/api/api.py
     volumes:
@@ -35,14 +35,3 @@ services:
       - mongo
     depends_on:
       - mongo
-  # fetcher:
-  #   image: ampsersandlabs/houdini-fetcher
-  #   build: .
-  #   command: python houdini/fetch_data.py
-  #   volumes:
-  #     - .:/app
-  #   env_file: .env
-  #   links:
-  #     - mongo
-  #   depends_on:
-  #     - mongo

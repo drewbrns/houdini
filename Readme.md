@@ -1,6 +1,6 @@
 # Houdini - The Research
 
-An exploration into datascience, a research into figuring out how to determine purchase intent using from a social feed using maching learning. 
+An exploration into datascience and machine learning, a research into figuring out how to determine purchase intent using from a social feed using maching learning. It is largely based on the research paper [Identifying Purchase Intent from Social Posts](https://ojs.aaai.org/index.php/ICWSM/article/view/14505) by Vineet Gupta, Devesh Varshney, Harsh Jhamtani, Deepam Kedia and Shweta Karwa.
 
 ## Getting Started
 
@@ -9,7 +9,7 @@ These instructions will get you a copy of the project up and running on your loc
 ### Clone this repository unto your system
 
 ```
-git clone git@bitbucket.org:ampersandlabs-gh/houdini-research.git
+git clone https://github.com/drewbrns/houdini.git
 ```
 
 ### Run using docker
@@ -51,18 +51,9 @@ notebook_1  | [I 13:55:37.610 NotebookApp] 302 GET /?token=514848f23f594b8adc7e1
 * [Pandas](https://pandas.pydata.org/) - Data wrangling
 * [Matplotlib](https://matplotlib.org/) - Ploting Graphs
 * [Scikit-learn](http://scikit-learn.org/) - Machine Learning tools
-* [Tensorflow](https://www.tensorflow.org/) - Machine Learning tools 
 
-
-
-
-## License
-
-This project is licensed under the ISC License - see the [LICENSE.md](LICENSE.md) file for details
 
 ## Acknowledgments
 
 * Hat tip to anyone who's code was used
-* Inspiration
-* etc
 
