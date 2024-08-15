@@ -42,7 +42,7 @@ notebook_1  | [I 13:55:37.610 NotebookApp] 302 GET /?token=514848f23f594b8adc7e1
 
 ## Built With
 
-* [Python](https://python.org/) - The web framework used
+* [Python](https://python.org/) - Programming Language
 * [PIP]() - Dependency Management
 * [Jupyter](https://jupyter.org/) - Notebook
 * [Scrapy](https://scrapy.org/) - Web Scraping 
